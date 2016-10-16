@@ -4,48 +4,43 @@
 #         self.val = x
 #         self.next = None
 
-class Solution(object):
+class Solution:
+    """
+    @param lists: a list of ListNode
+    @return: The head of one sorted list.
+    """
     def mergeKLists(self, lists):
-        """
-        :type lists: List[ListNode]
-        :rtype: ListNode
-        """
-        def mergeTwoLists(l1, l2):
-            """
-            :type l1: ListNode
-            :type l2: ListNode
-            :rtype: ListNode
-            """
-            if not (l1 or l2):
-                return None
-            if not l1:
-                return l2
-            if not l2:
-                return l1
-            n1 = l1
-            n2 = l2
-            l = ListNode(min(n1.val,n2.val))
-            n = l
-            while(n1 or n2):
-                if n1.val<n2.val:
-                    n1 = n1.next
-                else:
-                    n2 = n2.next
-                if n1 == None:
-                    n.next = n2
-                    return l
-                if n2 == None:
-                    n.next = n1
-                    return l
-                n.next = ListNode(min(n1.val,n2.val))
-                n = n.next
+        # write your code here
+        self.heap = [[i, lists[i].val] for i in range(len(lists)) if lists[i] != None]
+        self.hsize = len(self.heap)
+        for i in range(self.hsize - 1, -1, -1):
+            self.adjustdown(i)
+        nHead = ListNode(0)
+        head = nHead
+        while self.hsize > 0:
+            ind, val = self.heap[0][0], self.heap[0][1]
+            head.next = lists[ind]
+            head = head.next
+            lists[ind] = lists[ind].next
+            if lists[ind] is None:
+                self.heap[0] = self.heap[self.hsize-1]
+                self.hsize = self.hsize - 1
+            else:
+                self.heap[0] = [ind, lists[ind].val]
+            self.adjustdown(0)
+        return nHead.next
 
-        if len(lists) == 0:
-            return None
-        elif len(lists) == 2:
-            return mergeTwoLists(lists[0], lists[1])
-        elif len(lists) == 1:
-            return lists[0]
-        else:
-            length = len(lists)
-            return self.mergeKLists([self.mergeKLists(lists[:length/2]),self.mergeKLists(lists[length/2:])])
+    def adjustdown(self, p):
+        lc = lambda x: (x + 1) * 2 - 1
+        rc = lambda x: (x + 1) * 2
+        while True:
+            np, pv = p, self.heap[p][1]
+            if lc(p) < self.hsize and self.heap[lc(p)][1] < pv:
+                np, pv = lc(p), self.heap[lc(p)][1]
+            if rc(p) < self.hsize and self.heap[rc(p)][1] < pv:
+                np = rc(p)
+            if np == p:
+                break
+            else:
+                self.heap[np], self.heap[p] = self.heap[p], self.heap[np]
+                p = np
