@@ -1,5 +1,5 @@
 class Solution(object):
-    def intersect(self, nums1, nums2):
+    def intersection(self, nums1, nums2):
         """
         :type nums1: List[int]
         :type nums2: List[int]
@@ -8,13 +8,10 @@ class Solution(object):
         table={}
         result = []
         for n in nums1:
-            if n in table:
-                table[n]+=1
-            else:
-                table[n]=1
+            table[n]=1
         for n in nums2:
             if n in table: 
-                if table[n]>0:
-                    result+=[n]
-                    table[n]-=1
+                if table[n]==1:
+                    result.append(n)
+                    table[n]=2
         return result
