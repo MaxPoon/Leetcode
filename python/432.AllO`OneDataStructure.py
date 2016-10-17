@@ -18,7 +18,7 @@ class AllOne(object):
         if key in self.keys:
             self.keys[key]+=1
             i = self.keysPosition[key]+self.deviation
-            while(i<len(self.keysOrder)-1) and self.keys[self.keysOrder[i]] >= self.keys[self.keysOrder[i+1]]:
+            while(i<len(self.keysOrder)-1) and self.keys[self.keysOrder[i]] > self.keys[self.keysOrder[i+1]]:
                 self.keysOrder[i], self.keysOrder[i+1] = self.keysOrder[i+1], self.keysOrder[i]
                 self.keysPosition[self.keysOrder[i]]-=1
                 i+=1
@@ -48,7 +48,7 @@ class AllOne(object):
             else:
                 self.keys[key]-=1
                 i = self.keysPosition[key]+self.deviation
-                while(i>0) and (self.keys[self.keysOrder[i]] <= self.keys[self.keysOrder[i-1]]):
+                while(i>0) and (self.keys[self.keysOrder[i]] < self.keys[self.keysOrder[i-1]]):
                     self.keysOrder[i], self.keysOrder[i-1] = self.keysOrder[i-1], self.keysOrder[i]
                     self.keysPosition[self.keysOrder[i]]+=1
                     i-=1
