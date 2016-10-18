@@ -5,7 +5,6 @@ class Solution(object):
         :rtype: int
         """
         n = len(nums)
-        dp = [0]*n
         if n==0:
             return 0
         if n==1:
@@ -13,8 +12,10 @@ class Solution(object):
         if n==2:
             return max(nums)
         else:
+            dp = [0]*n
             dp[0]=nums[0]
             dp[1]=nums[1]
-            for i in range(2,n):
-                dp[i]=max(dp[:i-1])+nums[i]
+            dp[2]=nums[2] + nums[0]
+            for i in range(3,n):
+                dp[i]=max(dp[i-2],dp[i-3])+nums[i]
             return max(dp)
