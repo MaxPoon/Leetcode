@@ -18,4 +18,4 @@ class Solution(object):
             dp[2]=nums[2] + nums[0]
             for i in range(3,n):
                 dp[i]=max(dp[i-2],dp[i-3])+nums[i]
-            return max(dp)
+            return max(dp[-1], dp[-2])
