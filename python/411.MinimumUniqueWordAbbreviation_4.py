@@ -12,6 +12,7 @@ class Solution(object):
 		self.length = self.size
 		self.dfs('', 0, 0)
 		return self.ans
+
 	def dfs(self, abbr, length, depth):
 		if length >= self.length: return
 		if depth == self.size:
@@ -25,6 +26,7 @@ class Solution(object):
 		if depth == 0 or not abbr[-1].isdigit():
 			for x in range(2, self.size - depth + 1):
 				self.dfs(abbr + str(x), length + 1, depth + x)
+				
 	def validWordAbbreviation(self, word, abbr):
 		"""
 		:type word: str
