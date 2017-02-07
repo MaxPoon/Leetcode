@@ -1,3 +1,3 @@
 # Leetcode
 
-My solutions to the algorithm and SQL questions on leetcode.
+My solutions to the algorithm, shell and SQL questions on leetcode.
