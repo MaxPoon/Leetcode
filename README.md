@@ -1,3 +1,3 @@
 # Leetcode
 
-My solutions to the algorithm, shell and SQL questions on [leetcode](https://leetcode.com/).
+My solutions to the algorithm (python, javascript, java, c++), shell and SQL questions on [leetcode](https://leetcode.com/).
