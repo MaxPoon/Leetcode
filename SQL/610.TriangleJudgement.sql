@@ -1,0 +1,1 @@
+SELECT *, IF(GREATEST(x, y, z)<(x+y+z)/2, 'Yes', 'No') as triangle FROM triangle;
